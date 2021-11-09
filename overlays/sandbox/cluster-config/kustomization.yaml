@@ -9,3 +9,4 @@ namespace: openshift-gitops
 
 patchesStrategicMerge:
   - patch-cluster-config-app.yaml
+  - patch-cluster-console-links.yaml
