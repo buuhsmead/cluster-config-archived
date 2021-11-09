@@ -1,0 +1,14 @@
+
+* cluster-config
+
+
+based on the fine repo https://github.com/gnunn-gitops/cluster-config
+
+** General install of Operator
+kustomize build base/openshift-gitops/operator/ | oc apply -f -
+
+** Adjustment for the current environment
+kustomize build overlays/sandbox/openshift-gitops/instance | oc apply -f -
+
+** Load the cluster-config
+kustomize build overlays/sandbox/cluster-config | oc apply -f -
