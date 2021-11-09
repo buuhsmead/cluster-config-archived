@@ -1,0 +1,6 @@
+
+* cluster-config
+
+
+based on the fine repo https://github.com/gnunn-gitops/cluster-config
+
