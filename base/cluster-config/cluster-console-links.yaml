@@ -12,5 +12,6 @@ spec:
       selfHeal: true
   destination:
     server: https://kubernetes.default.svc
+    # it is a cluster wide scope, so no need for namespace
     # namespace: cluster-config
 
