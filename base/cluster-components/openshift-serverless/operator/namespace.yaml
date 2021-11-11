@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    openshift.io/description: "Serverless operator"
+    openshift.io/display-name: "Serverless operator"
+  name: openshift-serverless
+

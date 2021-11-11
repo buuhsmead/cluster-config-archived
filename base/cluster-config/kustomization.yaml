@@ -5,4 +5,6 @@ resources:
   - cluster-config-project.yaml
   - cluster-config-app.yaml
   - cluster-console-links.yaml
+  - cluster-openshift-serverless.yaml
+  
 
