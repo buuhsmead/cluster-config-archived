@@ -1,0 +1,15 @@
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  labels:
+    operators.coreos.com/codeready-workspaces2.openshift-operators: ''
+  name: codeready-workspaces2
+  namespace: openshift-operators
+spec:
+  channel: tech-preview-latest-all-namespaces
+  installPlanApproval: Automatic
+  name: codeready-workspaces2
+  source: redhat-operators
+  sourceNamespace: openshift-marketplace
+  startingCSV: crwoperatorallnamespaces.v2.12.101
+
