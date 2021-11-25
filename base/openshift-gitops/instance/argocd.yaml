@@ -22,6 +22,7 @@ spec:
     defaultPolicy: ''
     policy: |
       g, system:cluster-admins, role:admin
+      g, argocd-admins, role:admin
     scopes: '[groups]'
   repo:
     resources:

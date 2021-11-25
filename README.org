@@ -10,5 +10,12 @@ kustomize build base/openshift-gitops/operator/ | oc apply -f -
 ** Adjustment for the current environment
 kustomize build overlays/sandbox/openshift-gitops/instance | oc apply -f -
 
+
+** Create a group for access named 'argocd-admins'
+
+
+ oc adm groups new argocd-admins USER1 USER2
+
+
 ** Load the cluster-config
 kustomize build overlays/sandbox/cluster-config | oc apply -f -
