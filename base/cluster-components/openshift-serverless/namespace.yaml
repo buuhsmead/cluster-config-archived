@@ -4,6 +4,5 @@ metadata:
   annotations:
     openshift.io/description: "Serverless operator"
     openshift.io/display-name: "Serverless operator"
-    argocd.argoproj.io/hook: PreSync
   name: openshift-serverless
 
