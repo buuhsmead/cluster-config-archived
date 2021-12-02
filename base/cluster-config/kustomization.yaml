@@ -6,7 +6,7 @@ resources:
   - cluster-config-app.yaml
   - cluster-console-links.yaml
   - cluster-openshift-serverless.yaml
-  - patch-red-hat-camel-k-operator.yaml
+  - red-hat-camel-k-operator.yaml
   #- cluster-codeready-workspaces.yaml
 
 
