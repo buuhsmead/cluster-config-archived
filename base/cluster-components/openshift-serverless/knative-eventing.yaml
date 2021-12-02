@@ -1,6 +1,8 @@
 apiVersion: operator.knative.dev/v1alpha1
 kind: KnativeEventing
 metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "5"
   name: knative-eventing
   namespace: knative-eventing
 spec: {}
