@@ -10,6 +10,7 @@ namespace: openshift-gitops
 patchesStrategicMerge:
   - patch-cluster-config-app.yaml
   - patch-cluster-console-links.yaml
-    #  - patch-cluster-openshift-serverless.yaml
+  - patch-cluster-openshift-serverless.yaml
+  - patch-red-hat-camel-k-operator.yaml
     #  - patch-cluster-codeready-workspaces.yaml
 

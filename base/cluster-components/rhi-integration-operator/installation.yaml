@@ -1,0 +1,46 @@
+apiVersion: integration.redhat.com/v1
+kind: Installation
+metadata:
+  name: rhi-installation
+spec:
+  3scale-apicast-installation:
+    enabled: false
+    mode: namespace
+    namespace: rhi-3scale-apicast
+  amq-broker-installation:
+    enabled: false
+    mode: namespace
+    namespace: rhi-amq-broker
+  fuse-online-installation:
+    enabled: false
+    mode: namespace
+    namespace: rhi-fuse-online
+  api-designer-installation:
+    enabled: false
+    mode: namespace
+    namespace: rhi-api-designer
+  3scale-installation:
+    enabled: false
+    mode: namespace
+    namespace: rhi-3scale
+  amq-interconnect-installation:
+    enabled: false
+    mode: namespace
+    namespace: rhi-amq-interconnect
+  service-registry-installation:
+    enabled: false
+    mode: namespace
+    namespace: rho-service-registry
+  camel-k-installation:
+    enabled: false
+    mode: namespace
+    namespace: rhi-camel-k
+  fuse-console-installation:
+    enabled: false
+    mode: namespace
+    namespace: rhi-fuse-console
+  amq-streams-installation:
+    enabled: false
+    mode: namespace
+    namespace: rhi-amq-streams
+

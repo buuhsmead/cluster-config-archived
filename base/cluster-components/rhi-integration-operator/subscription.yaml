@@ -1,0 +1,15 @@
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  labels:
+    operators.coreos.com/integration-operator.openshift-operators: ''
+  name: integration-operator
+  namespace: openshift-operators
+spec:
+  channel: 1.x
+  installPlanApproval: Automatic
+  name: integration-operator
+  source: redhat-operators
+  sourceNamespace: openshift-marketplace
+  startingCSV: integration-operator.v1.2.1
+
