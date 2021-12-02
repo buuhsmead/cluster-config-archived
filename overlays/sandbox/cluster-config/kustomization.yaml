@@ -12,5 +12,4 @@ patchesStrategicMerge:
   - patch-cluster-console-links.yaml
   - patch-cluster-openshift-serverless.yaml
   - patch-red-hat-camel-k-operator.yaml
-    #  - patch-cluster-codeready-workspaces.yaml
-
+  #- patch-cluster-codeready-workspaces.yaml
