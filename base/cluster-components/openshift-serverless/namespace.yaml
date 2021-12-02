@@ -4,5 +4,6 @@ metadata:
   annotations:
     openshift.io/description: "Serverless operator"
     openshift.io/display-name: "Serverless operator"
+    argocd.argoproj.io/sync-wave: "1"
   name: openshift-serverless
 
