@@ -19,3 +19,13 @@ kustomize build overlays/sandbox/openshift-gitops/instance | oc apply -f -
 
 ** Load the cluster-config
 kustomize build overlays/sandbox/cluster-config | oc apply -f -
+
+
+
+** serverless
+TODO
+
+kustomize build overlays/sandbox/cluster-components/cluster-openshift-serverless | oc apply -f -
+TODO sequence not yet right
+TODO inter-dependencies not right
+
