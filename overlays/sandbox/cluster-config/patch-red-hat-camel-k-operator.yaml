@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: red-hat-camel-k-operator
+  name: red-hat-camel-k
 
 spec:
   source:
