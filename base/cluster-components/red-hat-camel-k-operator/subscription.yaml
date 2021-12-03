@@ -6,10 +6,10 @@ metadata:
   name: red-hat-camel-k
   namespace: openshift-operators
 spec:
-  channel: 1.4.x
+  channel: 1.6.x
   installPlanApproval: Automatic
   name: red-hat-camel-k
   source: redhat-operators
   sourceNamespace: openshift-marketplace
-  startingCSV: red-hat-camel-k-operator.v1.4.2
+  startingCSV: red-hat-camel-k-operator.v1.6.0
 
