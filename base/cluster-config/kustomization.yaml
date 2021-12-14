@@ -7,6 +7,8 @@ resources:
   - cluster-console-links.yaml
   - cluster-openshift-serverless.yaml
   - red-hat-camel-k-operator.yaml
+  - cluster-jaeger-product.yaml
+  - cluster-kiali-ossm.yaml
   - cluster-servicemesh-operator.yaml
   #- cluster-codeready-workspaces.yaml
 
