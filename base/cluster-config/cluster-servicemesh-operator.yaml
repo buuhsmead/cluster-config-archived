@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cluster-servicemesh-operator
+
+spec:
+  project: cluster-config
+  syncPolicy:
+    automated:
+      prune: true
+# changes that are made to the live cluster will trigger automated sync
+      selfHeal: true
+  destination:
+    server: https://kubernetes.default.svc
+    # namespace is defined by overlay/xxxx
+    # namespace: cluster-config
+
