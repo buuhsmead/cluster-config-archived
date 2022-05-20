@@ -1,0 +1,39 @@
+apiVersion: keycloak.org/v1alpha1
+kind: Keycloak
+metadata:
+  name: sso
+  labels:
+    app: sso
+spec:
+  instances: 2
+  externalAccess:
+    enabled: true
+  keycloakDeploymentSpec:
+    experimental:
+      env:
+        - name: JBOSS_HA_IP
+          value: '0.0.0.0'
+
+#   externalDatabase:
+#     - keycloak-db-secret
+
+
+# keyclok-db-secrte
+
+# apiVersion: v1
+# kind: Secret
+# metadata:
+#   name: keycloak-db-secret
+#   namespace: keycloak
+#   stringData:
+#       POSTGRES_DATABASE: <Database Name>
+#       POSTGRES_EXTERNAL_ADDRESS: <External Database IP or URL (resolvable by K8s)>
+#       POSTGRES_EXTERNAL_PORT: <External Database Port>
+#       # Strongly recommended to use <'Keycloak CR Name'-postgresql>         POSTGRES_HOST: <Database Service Name>         POSTGRES_PASSWORD: <Database Password>
+#       # Required for AWS Backup functionality         POSTGRES_SUPERUSER: true         POSTGRES_USERNAME: <Database Username>
+#   type: Opaque
+#      Both POSTGRES_EXTERNAL_ADDRESS and POSTGRES_EXTERNAL_PORT are specifically
+#      required for creating connection to the external database. The secret name
+#      is created using the following convention: <Custom Resource Name>-db-secret
+#      For more information, please refer to the Operator documentation.
+

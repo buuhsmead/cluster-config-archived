@@ -1,0 +1,19 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+
+namespace: keycloak
+
+resources:
+  - namespace.yaml
+  - ../../../base/cluster-components/red-hat-sso
+  - keycloak.yaml
+
+patches:
+  - patch: |-
+      - op: replace
+        path: "/spec/targetNamespaces/0"
+        value: "keycloak"
+    target:
+      kind: OperatorGroup
+      name: "rhsso-operatorgroup"

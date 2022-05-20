@@ -1,0 +1,13 @@
+- op: remove
+  path: /spec/template/spec/containers/0/securityContext/runAsUser
+- op: remove
+  path: /spec/template/spec/securityContext/fsGroup
+- op: replace
+  path: /spec/template/spec/containers/0/resources
+  value:
+      limits:
+        cpu: 30m
+        memory: '40Mi'
+      requests:
+        cpu: 20m
+        memory: '20Mi'
