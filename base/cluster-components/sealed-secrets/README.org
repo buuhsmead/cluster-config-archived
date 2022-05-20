@@ -1,0 +1,58 @@
+
+= Installation of Controller
+
+This will install the sealed secrets controller in namespace sealed-secrets.
+
+kustomize build . | oc apply -f -
+
+= Download kubeseal
+
+You need to download the client utility named kubeseal from
+https://github.com/bitnami-labs/sealed-secrets/releases/tag/v0.17.5
+
+for you running OS
+
+
+= Usage
+
+Be sure to be in the right active project 'sealed-secrets'.
+Check this with
+
+oc config current-context
+
+== Create your secret
+
+oc create secret generic test-secret --from-literal=dummykey1=supersecret --from-literal=dummykey2=topsecret --dry-run -o yaml > test-secret.yaml
+
+
+== Make it a sealed secret
+
+cat test-secret.yaml | kubeseal --controller-namespace sealed-secrets -o yaml --scope strict > sealedtest-secret.yaml
+
+== Create the (sealed) secret in OpenShift
+
+oc apply -f sealedtest-secret.yaml
+
+== Describe the created secrets
+
+oc describe secret/test-secret
+
+oc describe sealedsecret/test-secret
+
+== Update an Encrypted SealedSecret
+
+oc create secret generic test-secret --from-literal=dummykey1=supersecret --from-literal=dummykey2=topsecret --from-literal=dummykey3=new-secret --dry-run -o yaml >test-secret.yaml
+cat test-secret.yaml |kubeseal --controller-namespace sealed-secrets -o yaml --scope strict --merge-into sealedtest-secret.yaml
+
+oc apply -f sealedtest-secret.yaml
+oc describe secret/test-secret
+
+
+= Only commit to git
+
+Now only commit to git the file 'sealedtest-secret.yaml'.
+
+The file 'test-secret.yaml' should NOT be commited to git!
+
+
+
