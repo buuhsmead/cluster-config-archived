@@ -3,12 +3,12 @@ kind: Subscription
 metadata:
   name: amq-streams
 spec:
-  channel: amq-streams-2.1.x
+  channel: stable
   installPlanApproval: Automatic
   name: amq-streams
   source: redhat-operators
   sourceNamespace: openshift-marketplace
-  startingCSV: amqstreams.v2.1.0-0
+  startingCSV: amqstreams.v2.1.0-4
 
 # recommend to not use stable channel, use the channel for that specific startingCSV
 # recommend to use a specific namespace
