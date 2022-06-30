@@ -1,0 +1,57 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: kowl
+  labels:
+    app: kowl
+    app.kubernetes.io/component: kowl
+    app.kubernetes.io/instance: kowl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      deployment: kowl
+      # strimzi.io/cluster: labs-cluster
+  template:
+    metadata:
+      labels:
+        deployment: kowl
+        # strimzi.io/cluster: labs-cluster
+      annotations:
+        openshift.io/generated-by: OpenShiftNewApp
+    spec:
+      containers:
+        - name: kowl
+          image: >-
+            quay.io/cloudhut/kowl@sha256:89edce5d12ab876984e455117a7cc9af98d1e98dd1672c23a168324e26111eb3
+          ports:
+            - name: web
+              containerPort: 8080
+              protocol: TCP
+          envFrom:
+            - configMapRef:
+                name: kowl-config
+          resources:
+            requests:
+              cpu: 100m
+              memory: 100Mi
+            limits:
+              cpu: 200m
+              memory: 200Mi
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          imagePullPolicy: IfNotPresent
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      securityContext: {}
+      schedulerName: default-scheduler
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 25%
+      maxSurge: 25%
+  revisionHistoryLimit: 10
+  progressDeadlineSeconds: 600
+
+# https://github.com/redpanda-data/console/blob/master/docs/config/console.yaml

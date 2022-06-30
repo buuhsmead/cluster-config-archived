@@ -1,0 +1,17 @@
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: kowl
+  labels:
+    app: kowl
+    app.kubernetes.io/component: kowl
+    app.kubernetes.io/instance: kowl
+  annotations:
+    openshift.io/host.generated: 'true'
+spec:
+  to:
+    kind: Service
+    name: kowl
+    weight: 100
+  port:
+    targetPort: 8080
