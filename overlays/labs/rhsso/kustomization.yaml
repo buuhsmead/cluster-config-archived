@@ -2,7 +2,10 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 
-namespace: keycloak
+namespace: rhsso
+
+commonLabels:
+  app: rhsso
 
 resources:
   - namespace.yaml
@@ -13,7 +16,7 @@ patches:
   - patch: |-
       - op: replace
         path: "/spec/targetNamespaces/0"
-        value: "keycloak"
+        value: "rhsso"
     target:
       kind: OperatorGroup
-      name: "rhsso-operatorgroup"
+      name: "rhsso-og"

@@ -1,10 +1,10 @@
 apiVersion: operators.coreos.com/v1
 kind: OperatorGroup
 metadata:
-  annotations:
-    olm.providedAPIs: >-
-      Keycloak.v1alpha1.keycloak.org,KeycloakBackup.v1alpha1.keycloak.org,KeycloakClient.v1alpha1.keycloak.org,KeycloakRealm.v1alpha1.keycloak.org,KeycloakUser.v1alpha1.keycloak.org
-  name: rhsso-operatorgroup
+  # annotations:
+  #   olm.providedAPIs: >-
+  #     Keycloak.v1alpha1.keycloak.org,KeycloakBackup.v1alpha1.keycloak.org,KeycloakClient.v1alpha1.keycloak.org,KeycloakRealm.v1alpha1.keycloak.org,KeycloakUser.v1alpha1.keycloak.org
+  name: rhsso-og
 spec:
   targetNamespaces:
-    - keycloak
+    - RHSSO_PROJECT_NAME

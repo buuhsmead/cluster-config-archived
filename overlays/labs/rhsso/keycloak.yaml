@@ -2,17 +2,22 @@ apiVersion: keycloak.org/v1alpha1
 kind: Keycloak
 metadata:
   name: sso
-  labels:
-    app: sso
 spec:
   instances: 2
+  multiAvailablityZones:
+    enabled: true
   externalAccess:
     enabled: true
+  externalDatabase:
+    enabled: false
+  # externalDatabase:false is NOT supported in production environments.
   keycloakDeploymentSpec:
     experimental:
       env:
         - name: JBOSS_HA_IP
           value: '0.0.0.0'
+
+
 
 #   externalDatabase:
 #     - keycloak-db-secret

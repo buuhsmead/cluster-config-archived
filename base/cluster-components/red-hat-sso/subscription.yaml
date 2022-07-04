@@ -9,3 +9,6 @@ spec:
   source: redhat-operators
   sourceNamespace: openshift-marketplace
   # startingCSV: rhsso-operator.7.5.2-opr-002
+  # startingCSV: rhsso-operator.7.5.2-opr-003
+
+
