@@ -3,7 +3,7 @@ kind: Keycloak
 metadata:
   name: sso
 spec:
-  instances: 2
+  instances: 1
   multiAvailablityZones:
     enabled: true
   externalAccess:

@@ -9,7 +9,7 @@ commonLabels:
 
 resources:
   - namespace.yaml
-  - ../../../base/cluster-components/red-hat-sso
+  - ../../../base/cluster-components/red-hat-sso-operator
   - keycloak.yaml
 
 patches:
