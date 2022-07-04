@@ -8,12 +8,18 @@ spec:
   name: amq-streams
   source: redhat-operators
   sourceNamespace: openshift-marketplace
-  startingCSV: amqstreams.v2.1.0-4
+  # startingCSV: amqstreams.v2.1.0-4
 
 # recommend to not use stable channel, use the channel for that specific startingCSV
 # recommend to use a specific namespace
 
-
+# spec:
+#     channel: stable
+#     installPlanApproval: Automatic
+#     name: amq-streams
+#     source: redhat-operators
+#     sourceNamespace: openshift-marketplace
+#     startingCSV: amqstreams.v2.1.0-5
 
 # spec:
 #   channel: stable

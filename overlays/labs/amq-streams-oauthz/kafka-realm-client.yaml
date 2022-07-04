@@ -1,0 +1,15 @@
+apiVersion: keycloak.org/v1alpha1
+kind: KeycloakClient
+metadata:
+  name: kafka-broker
+  labels:
+    app: sso
+spec:
+  realmSelector:
+    matchLabels:
+      app: sso
+  client:
+    clientId: kafka-broker
+    secret: kafka-broker
+    enabled: true
+    serviceAccountsEnabled: true

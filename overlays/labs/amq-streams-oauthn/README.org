@@ -1,0 +1,89 @@
+
+
+Base directory is '~/projects/github.com/buuhsmead/cluster-config'
+
+
+** Install RHSSO
+
+
+#+begin_src shell
+kustomize build overlays/labs/red-hat-sso-instance/ | oc apply -f -
+#+end_src
+
+
+#+begin_src shell
+overlays/labs/red-hat-sso-instance/get-info.sh
+#+end_src
+
+
+
+
+https://github.com/strimzi/strimzi-kafka-oauth/tree/main/examples/kubernetes
+
+#+begin_src shell
+kustomize build overlays/labs/amq-streams-oauthn/ | oc apply -f -
+#+end_src
+
+
+#+begin_src shell
+export RHSSO_REALM=kafka-authn
+export OAUTHN_PROJECT_NAME=oauthn
+export STRIMZI_CLUSTER_NAME=oauthn-cluster
+
+ # RHSSO_KAFKA_BROKER_SECRET=<SECRET_FOR_KAFKA_BROKER_FROM_KEYCLOAK_CONSOLE>
+
+export RHSSO_KAFKA_BROKER_SECRET=kafka-broker-secret
+oc create secret generic broker-oauth-secret -n ${OAUTHN_PROJECT_NAME} --from-literal=secret=${RHSSO_KAFKA_BROKER_SECRET}
+#+end_src
+
+#+begin_src shell
+# Get the CA from which the TLS trust is created for RHSSO_INTERNAL_URL
+oc get cm openshift-service-ca.crt -o json -n ${RHSSO_PROJECT_NAME}| jq -r '.data."service-ca.crt"' > $HOME/tmp/rhsso-service-ca.crt
+oc create secret generic ca-truststore -n ${OAUTHN_PROJECT_NAME} --from-file=ca.crt=$HOME/tmp/rhsso-service-ca.crt
+#+end_src
+
+
+
+#+begin_src shell
+keytool -printcert -rfc -sslserver $(echo ${RHSSO_EXTERNAL_URL} | sed -e 's|^[^/]*//||' -e 's|/.*$||'):443 > $HOME/tmp/rhsso-route-ca.crt
+oc create secret generic ca-truststore-route -n ${OAUTHN_PROJECT_NAME} --from-file=ca.crt=$HOME/tmp/rhsso-route-ca.crt
+#+end_src
+
+
+
+Get the certificates needed for mTLS using the p12 versions (JKS is deprecated)
+You need these for external clients accessing the broker via RHSSO_EXTERNAL_URL
+#+begin_src shell
+#!/usr/bin/env bash
+
+set -x
+
+export OAUTHN_PROJECT_NAME=oauthn
+export STRIMZI_CLUSTER_NAME=oauthn-cluster
+
+oc get secret ${STRIMZI_CLUSTER_NAME}-clients-ca-cert -n ${OAUTHN_PROJECT_NAME} -o jsonpath='{.data.ca\.p12}'| base64 -d > client-ca.p12
+oc get secret ${STRIMZI_CLUSTER_NAME}-clients-ca-cert -n ${OAUTHN_PROJECT_NAME} -o jsonpath='{.data.ca\.password}' | base64 -d > client-ca.password
+oc get secret ${STRIMZI_CLUSTER_NAME}-cluster-ca-cert -n ${OAUTHN_PROJECT_NAME} -o jsonpath='{.data.ca\.p12}'| base64 -d > cluster-ca.p12
+oc get secret ${STRIMZI_CLUSTER_NAME}-cluster-ca-cert -n ${OAUTHN_PROJECT_NAME} -o jsonpath='{.data.ca\.password}'| base64 -d > cluster-ca.password
+
+#+end_src
+
+
+export EXTERNAL_BOOTSTRAP=$(oc get kafka ${STRIMZI_CLUSTER_NAME} -o=jsonpath='{.status.listeners[?(@.type=="external")].bootstrapServers}{"\n"}' -n ${OAUTHN_PROJECT_NAME})
+export INTERNAL_BOOTSTRAP=$(oc get kafka ${STRIMZI_CLUSTER_NAME} -o=jsonpath='{.status.listeners[?(@.type=="internal")].bootstrapServers}{"\n"}' -n ${OAUTHN_PROJECT_NAME})
+
+
+
+When using an external oauth route at the listiner of a kaf broker
+then 'validIssuerUri' and 'jwksEndpointUri' MUST point to the same
+rhsso endpoint. So do not mix internal or external endpoint.
+Seems that token validation is also checking who (rhsso) provided the token
+
+
+
+Check if i is configured: 'maxSecondsWithoutReauthentication: 3600'
+Authentication complete; session max lifetime from broker config
+
+DEBUG logging
+Check users authenticated search for 'Successfully authenticate User'
+
