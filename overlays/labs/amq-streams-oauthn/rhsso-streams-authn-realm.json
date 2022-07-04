@@ -1,5 +1,5 @@
 {
-  "realm": "demo",
+  "realm": "kafka-authn",
   "accessTokenLifespan": 2592000,
   "ssoSessionMaxLifespan": 32140800,
   "ssoSessionIdleTimeout": 32140800,
